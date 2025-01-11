@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "232744207953",
+    "project_id": "hackversemedcave",
+    "storage_bucket": "hackversemedcave.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232744207953:android:933fb499e3ea9c38c91a70",
+        "android_client_info": {
+          "package_name": "com.example.medcave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVDxa3agyjUHDkpvzwE-Zw6q94qO1UZM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

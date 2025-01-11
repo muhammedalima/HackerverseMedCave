@@ -40,6 +40,9 @@ dependencies:
   flutter_animate:
   google_nav_bar:
   fluttericon:
+  firebase_core:
+  firebase_auth:
+  firebase_database:
 
 dev_dependencies:
   flutter_test:

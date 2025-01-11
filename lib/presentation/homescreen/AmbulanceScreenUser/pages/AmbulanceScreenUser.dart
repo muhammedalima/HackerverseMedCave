@@ -7,6 +7,7 @@ class Ambulancescreenuser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Text(
         'This is Patent Ambulance Screen',
         style: FontStyles.titleHero,

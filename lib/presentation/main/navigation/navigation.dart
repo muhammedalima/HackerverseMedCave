@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:fluttericon/octicons_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:medcave/core/confiq/colors/appcolor.dart';
 import 'package:medcave/presentation/homescreen/AmbulanceScreenUser/pages/AmbulanceScreenUser.dart';
@@ -27,24 +31,24 @@ class _BNavigationBarState extends State<BNavigationBar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
-        color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           child: GNav(
             color: Colors.black,
             activeColor: AppColor.primaryGreen,
             tabBackgroundColor: AppColor.darkBlack,
             gap: 8,
-            padding:  EdgeInsets.all(16),
+            tabBorderRadius: 16,
+            padding: EdgeInsets.all(16),
             duration: Duration(milliseconds: 1000),
             iconSize: 25,
             tabs: const [
               GButton(
-                icon: Icons.home,
+                icon: Octicons.home,
                 text: 'Home',
               ),
               GButton(
-                icon: Icons.bike_scooter,
+                icon: FontAwesome.plus_squared_alt,
                 text: 'Ambulance',
               ),
               GButton(

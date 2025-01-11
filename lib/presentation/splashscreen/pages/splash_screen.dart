@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medcave/core/confiq/colors/appcolor.dart';
-import 'package:medcave/presentation/homescreen/patientscreen/pages/patientscreen.dart';
 import 'package:medcave/presentation/main/navigation/navigation.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const BNavigationBar(),
+              builder: (context) => BNavigationBar(),
             )));
   }
 

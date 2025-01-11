@@ -4,6 +4,7 @@ import 'package:fluttericon/octicons_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:medcave/core/confiq/colors/appcolor.dart';
 import 'package:medcave/presentation/homescreen/AmbulanceScreenUser/pages/AmbulanceScreenUser.dart';
+import 'package:medcave/presentation/homescreen/AmbulanceScreenUser/pages/AmbulanceTracker.dart';
 import 'package:medcave/presentation/homescreen/HospitalScreen/pages/HospitalScreenUser.dart';
 import 'package:medcave/presentation/homescreen/ProfilePage/pages/ProfilePage.dart';
 
@@ -17,8 +18,8 @@ class BNavigationBar extends StatefulWidget {
 class _BNavigationBarState extends State<BNavigationBar> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    Ambulancescreenuser(),
     Hospitalscreenuser(),
+    Ambulancescreenuser(),
     Profilepage(),
   ];
 

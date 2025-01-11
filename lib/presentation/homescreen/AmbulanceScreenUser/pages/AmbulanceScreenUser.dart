@@ -67,7 +67,7 @@ class _AmbulancescreenuserState extends State<Ambulancescreenuser> {
                       color: Colors.grey.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 6,
-                      offset: const Offset(0, 3), 
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -104,11 +104,11 @@ class _AmbulancescreenuserState extends State<Ambulancescreenuser> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const AmbulanceTracker()),
-  );
-                    
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AmbulanceTracker()),
+                    );
                   });
                 },
                 style: ElevatedButton.styleFrom(
@@ -116,12 +116,12 @@ class _AmbulancescreenuserState extends State<Ambulancescreenuser> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  minimumSize: const Size(double.infinity, 50), 
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text(
                   "SEARCH AMBULANCE",
                   style: TextStyle(
-                    color: Colors.black, 
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),

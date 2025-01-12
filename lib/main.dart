@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:medcave/presentation/homescreen/HospitalScreen/pages/HospitalScreenUser.dart';
 import 'package:medcave/presentation/loginsignup/login/login.dart';
 import 'package:medcave/presentation/loginsignup/signup/signup.dart';
+import 'package:medcave/presentation/main/navigation/navigation.dart';
 import 'firebase_options.dart';
 import 'package:medcave/core/confiq/theme/theme.dart';
 import 'package:medcave/presentation/homescreen/AmbulanceScreenDriver/pages/AmbulanceScreenDriver.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashToAuth(),
         '/login': (context) => const loginScreen(),
         '/signup': (context) => const SignUpPage(),
-        '/home': (context) => const Hospitalscreenuser(),
+        '/home': (context) => const BNavigationBar(),
       },
     );
   }

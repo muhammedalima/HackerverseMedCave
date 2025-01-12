@@ -20,7 +20,7 @@ class _BNavigationBarState extends State<BNavigationBar> {
   static const List<Widget> _widgetOptions = <Widget>[
     Hospitalscreenuser(),
     Ambulancescreenuser(),
-    Profilepage(),
+    ProfilePage(),
   ];
 
   @override

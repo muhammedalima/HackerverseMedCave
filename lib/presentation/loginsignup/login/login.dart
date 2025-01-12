@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medcave/presentation/homescreen/HospitalScreen/pages/HospitalScreenUser.dart';
 
+import '../auth_wrapper.dart';
 import '../signup/signup.dart';
 
 class loginScreen extends StatefulWidget {
@@ -35,11 +36,12 @@ class _loginScreenState extends State<loginScreen> {
       print("Sign in successful: ${userCredential.user?.uid}");  // Debug print
       
       if (mounted) {
-        // Force navigation to home screen
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Hospitalscreenuser()),
-          (route) => false,
+        // Navigate to AuthWrapper, which handles onboarding logic
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const AuthWrapper()),
         );
+      
       }
     } on FirebaseAuthException catch (e) {
       print("Firebase Auth Error: ${e.code}");  // Debug print

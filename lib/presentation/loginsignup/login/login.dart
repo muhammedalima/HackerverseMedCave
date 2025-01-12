@@ -18,57 +18,58 @@ class _loginScreenState extends State<loginScreen> {
   bool _isLoading = false;
   String? _errorMessage;
 
- Future<void> _login() async {
-  if (_formKey.currentState?.validate() ?? false) {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
+  Future<void> _login() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _isLoading = true;
+        _errorMessage = null;
+      });
 
-    try {
-      print("Attempting to sign in...");  // Debug print
-      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
-      
-      print("Sign in successful: ${userCredential.user?.uid}");  // Debug print
-      
-      if (mounted) {
-        // Force navigation to home screen
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Hospitalscreenuser()),
-          (route) => false,
+      try {
+        print("Attempting to sign in..."); // Debug print
+        final userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
         );
-      }
-    } on FirebaseAuthException catch (e) {
-      print("Firebase Auth Error: ${e.code}");  // Debug print
-      setState(() {
-        switch (e.code) {
-          case 'user-not-found':
-            _errorMessage = 'No user found with this email';
-            break;
-          case 'wrong-password':
-            _errorMessage = 'Wrong password provided';
-            break;
-          default:
-            _errorMessage = e.message ?? 'An error occurred during login';
+
+        print("Sign in successful: ${userCredential.user?.uid}"); // Debug print
+
+        if (mounted) {
+          // Force navigation to home screen
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const Hospitalscreenuser()),
+            (route) => false,
+          );
         }
-      });
-    } catch (e) {
-      print("General Error: $e");  // Debug print
-      setState(() {
-        _errorMessage = 'An unexpected error occurred';
-      });
-    } finally {
-      if (mounted) {
+      } on FirebaseAuthException catch (e) {
+        print("Firebase Auth Error: ${e.code}"); // Debug print
         setState(() {
-          _isLoading = false;
+          switch (e.code) {
+            case 'user-not-found':
+              _errorMessage = 'No user found with this email';
+              break;
+            case 'wrong-password':
+              _errorMessage = 'Wrong password provided';
+              break;
+            default:
+              _errorMessage = e.message ?? 'An error occurred during login';
+          }
         });
+      } catch (e) {
+        print("General Error: $e"); // Debug print
+        setState(() {
+          _errorMessage = 'An unexpected error occurred';
+        });
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }
   }
-}
 
   @override
   void dispose() {
@@ -99,7 +100,7 @@ class _loginScreenState extends State<loginScreen> {
                 ),
               ),
               Image.asset(
-                'assets/ambulance.png',
+                'assets/ambulanceImage.gif',
                 height: 300, // Increased image height
                 fit: BoxFit.contain,
               ),

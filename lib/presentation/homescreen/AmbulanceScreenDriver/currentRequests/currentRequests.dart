@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medcave/core/confiq/colors/appcolor.dart';
 
 import '../../../../core/confiq/fonts/font.dart';
 
@@ -7,14 +8,38 @@ class CurrentRequestsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Hardcoded data for current requests (can be replaced with actual dynamic data)
     final List<Map<String, String>> currentRequests = [
-      {"from": "Kochi", "to": "Aluva", "date": "10 Jan", "time": "3:00PM", "title": "Urgent Pickup"},
-      {"from": "Edapally", "to": "Thrissur", "date": "11 Jan", "time": "4:30PM", "title": "Emergency Response"},
-      {"from": "Vyttila", "to": "Ernakulam", "date": "12 Jan", "time": "6:00PM", "title": "Hospital Transfer"},
-      {"from": "Vyttila", "to": "Ernakulam", "date": "12 Jan", "time": "6:00PM", "title": "Hospital Transfer"},
+      {
+        "from": "Kochi",
+        "to": "Aluva",
+        "date": "10 Jan",
+        "time": "3:00PM",
+        "title": "Urgent Pickup"
+      },
+      {
+        "from": "Edapally",
+        "to": "Thrissur",
+        "date": "11 Jan",
+        "time": "4:30PM",
+        "title": "Emergency Response"
+      },
+      {
+        "from": "Vyttila",
+        "to": "Ernakulam",
+        "date": "12 Jan",
+        "time": "6:00PM",
+        "title": "Hospital Transfer"
+      },
+      {
+        "from": "Vyttila",
+        "to": "Ernakulam",
+        "date": "12 Jan",
+        "time": "6:00PM",
+        "title": "Hospital Transfer"
+      },
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
@@ -30,10 +55,9 @@ class CurrentRequestsWidget extends StatelessWidget {
           ],
         ),
         child: Column(
-          
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Text(
+            Text(
               "Current Requests",
               style: FontStyles.heading,
             ),
@@ -43,10 +67,12 @@ class CurrentRequestsWidget extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width - 32, // Full width minus padding
+                  width: MediaQuery.of(context).size.width -
+                      32, // Full width minus padding
                   padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
-                    color: Colors.yellow[700], // Yellow background for the request box
+                    color: AppColor
+                        .primaryGreen, // Yellow background for the request box
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(

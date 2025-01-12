@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medcave/core/confiq/colors/appcolor.dart';
 
 class FontStyles {
   static TextStyle titleHero = TextStyle(
+    color: AppColor.backgroundWhite,
     fontFamily: GoogleFonts.instrumentSans().fontFamily,
     fontSize: 72,
     fontWeight: FontWeight.w700,

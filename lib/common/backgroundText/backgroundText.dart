@@ -9,7 +9,6 @@ class CustomImageTextWidget extends StatelessWidget {
   // Constructor to accept data when the widget is used
   const CustomImageTextWidget({
     required this.text,
-    
   });
 
   @override
@@ -18,13 +17,18 @@ class CustomImageTextWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(
+          height: 32,
+        ),
         // First SVG image
         SvgPicture.asset(
-          'assets/vectors/upward.svg',  // Path for the first SVG image
-          width: 24,      // Adjust size as needed
-          height: 24,     // Adjust size as needed
+          'assets/vectors/upward.svg', // Path for the first SVG image
+          width: 24, // Adjust size as needed
+          height: 24, // Adjust size as needed
         ),
-
+        const SizedBox(
+          height: 24,
+        ),
         // Second element - Text passed to the widget
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -34,12 +38,17 @@ class CustomImageTextWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-
+        const SizedBox(
+          height: 24,
+        ),
         // Second SVG image
         SvgPicture.asset(
-          'assets/vectors/downward.svg',  // Path for the second SVG image
-          width: 24,       // Adjust size as needed
-          height: 24,      // Adjust size as needed
+          'assets/vectors/downward.svg', // Path for the second SVG image
+          width: 24, // Adjust size as needed
+          height: 24, // Adjust size as needed
+        ),
+        const SizedBox(
+          height: 32,
         ),
       ],
     );

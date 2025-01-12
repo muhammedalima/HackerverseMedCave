@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medcave/common/backgroundText/backgroundText.dart';
 import 'package:medcave/core/confiq/colors/appcolor.dart';
 import 'package:medcave/presentation/homescreen/AmbulanceScreenUser/pages/AmbulanceScreenUser.dart';
 import 'package:medcave/presentation/homescreen/HospitalScreen/widgets/ButtonAmbulanceSearch.dart';
@@ -23,7 +24,7 @@ class _HospitalscreenuserState extends State<Hospitalscreenuser> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(24.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +69,9 @@ class _HospitalscreenuserState extends State<Hospitalscreenuser> {
                                 ),
                               ],
                             ),
-                            Buttonarrrowicon(),
+                            Buttonarrrowicon(
+                              destination: Ambulancescreenuser(),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -82,13 +85,7 @@ class _HospitalscreenuserState extends State<Hospitalscreenuser> {
                         const SizedBox(height: 16),
                         Buttonambulancesearch(
                           text: "You haven\'t searched yet!",
-                          onClick: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const Ambulancescreenuser()));
-                          },
+                          onClick: () {},
                         ),
                       ],
                     ),
@@ -137,12 +134,18 @@ class _HospitalscreenuserState extends State<Hospitalscreenuser> {
                               ),
                             ],
                           ),
-                          Buttonarrrowicon(rotateAngle: 1.6),
+                          Buttonarrrowicon(
+                            rotateAngle: 1.6,
+                            destination: null,
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
+                const CustomImageTextWidget(
+                  text: 'Your Health, Our Care',
+                )
               ],
             ),
           ),

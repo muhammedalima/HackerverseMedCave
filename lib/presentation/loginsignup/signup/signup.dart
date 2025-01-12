@@ -1,74 +1,57 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:medcave/presentation/homescreen/HospitalScreen/pages/HospitalScreenUser.dart';
+import 'package:medcave/presentation/loginsignup/login/login.dart';
 
-import '../signup/signup.dart';
-
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _loginScreenState extends State<loginScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   String? _errorMessage;
 
- Future<void> _login() async {
-  if (_formKey.currentState?.validate() ?? false) {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
+  Future<void> _signUp() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _isLoading = true;
+        _errorMessage = null;
+      });
 
-    try {
-      print("Attempting to sign in...");  // Debug print
-      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
-      
-      print("Sign in successful: ${userCredential.user?.uid}");  // Debug print
-      
-      if (mounted) {
-        // Force navigation to home screen
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Hospitalscreenuser()),
-          (route) => false,
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
         );
-      }
-    } on FirebaseAuthException catch (e) {
-      print("Firebase Auth Error: ${e.code}");  // Debug print
-      setState(() {
-        switch (e.code) {
-          case 'user-not-found':
-            _errorMessage = 'No user found with this email';
-            break;
-          case 'wrong-password':
-            _errorMessage = 'Wrong password provided';
-            break;
-          default:
-            _errorMessage = e.message ?? 'An error occurred during login';
+        if (mounted) {
+                    Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const loginScreen(),
+            ),
+          );
         }
-      });
-    } catch (e) {
-      print("General Error: $e");  // Debug print
-      setState(() {
-        _errorMessage = 'An unexpected error occurred';
-      });
-    } finally {
-      if (mounted) {
+      } on FirebaseAuthException catch (e) {
         setState(() {
-          _isLoading = false;
+          _errorMessage = e.message ?? 'An error occurred during sign up';
         });
+      } catch (e) {
+        setState(() {
+          _errorMessage = 'An unexpected error occurred';
+        });
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }
   }
-}
 
   @override
   void dispose() {
@@ -126,14 +109,14 @@ class _loginScreenState extends State<loginScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Container(
+
+                      Container(
                             decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: IconButton(
-                              onPressed: _isLoading ? null : _login,
-                              icon: _isLoading
+                            ),child: IconButton(
+                          onPressed: _isLoading ? null : _signUp,
+                          icon: _isLoading
                                   ? const SizedBox(
                                       height: 20,
                                       width: 20,
@@ -164,7 +147,6 @@ class _loginScreenState extends State<loginScreen> {
                       const SizedBox(height: 8),
                       TextFormField(
                         controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           hintText: 'name@gmail.com',
                           filled: true,
@@ -232,10 +214,10 @@ class _loginScreenState extends State<loginScreen> {
                       Center(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/signup');
+                            Navigator.pushReplacementNamed(context, '/login');
                           },
                           child: const Text(
-                            'New? Create An account',
+                            'Already have account? Sign Up',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,

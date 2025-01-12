@@ -2,80 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medcave/presentation/homescreen/HospitalScreen/pages/HospitalScreenUser.dart';
 
-import '../signup/signup.dart';
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+class Onboardingscreen1 extends StatefulWidget {
+  const Onboardingscreen1({super.key});
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<Onboardingscreen1> createState() => _Onboardingscreen1State();
 }
 
-class _loginScreenState extends State<loginScreen> {
+class _Onboardingscreen1State extends State<Onboardingscreen1> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   String? _errorMessage;
-
- Future<void> _login() async {
-  if (_formKey.currentState?.validate() ?? false) {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    try {
-      print("Attempting to sign in...");  // Debug print
-      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
-      
-      print("Sign in successful: ${userCredential.user?.uid}");  // Debug print
-      
-      if (mounted) {
-        // Force navigation to home screen
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Hospitalscreenuser()),
-          (route) => false,
-        );
-      }
-    } on FirebaseAuthException catch (e) {
-      print("Firebase Auth Error: ${e.code}");  // Debug print
-      setState(() {
-        switch (e.code) {
-          case 'user-not-found':
-            _errorMessage = 'No user found with this email';
-            break;
-          case 'wrong-password':
-            _errorMessage = 'Wrong password provided';
-            break;
-          default:
-            _errorMessage = e.message ?? 'An error occurred during login';
-        }
-      });
-    } catch (e) {
-      print("General Error: $e");  // Debug print
-      setState(() {
-        _errorMessage = 'An unexpected error occurred';
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
-  }
-}
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +72,7 @@ class _loginScreenState extends State<loginScreen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: IconButton(
-                              onPressed: _isLoading ? null : _login,
+                              onPressed: (){},
                               icon: _isLoading
                                   ? const SizedBox(
                                       height: 20,

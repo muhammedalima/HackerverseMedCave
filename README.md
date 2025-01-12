@@ -12,9 +12,8 @@ MedCave is here to be your trusty cave between the chaos of emergencies and the 
 ## Tech Stack
 
 - **Frontend**: Flutter (for a smooth and shiny user experience)
-- **Backend**: [Insert backend solution here, if applicable]
-- **APIs**: [Insert APIs used here, if applicable]
-- **Database**: [Insert database here, if applicable]
+- **APIs**: Gemini API,Google Navigation API,Firebase Auth.
+- **Database**: Firebase.
 
 ## Installation (Let’s Get This Running)
 

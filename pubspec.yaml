@@ -44,11 +44,13 @@ dependencies:
   firebase_auth:
   firebase_database:
   shared_preferences:
+  cloud_firestore: ^5.6.1
   gif:
   google_generative_ai:
   google_maps_flutter:
   geolocator:
   geocoding:
+
 
 dev_dependencies:
   flutter_test:

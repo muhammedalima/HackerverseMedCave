@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medcave/presentation/homescreen/HospitalScreen/pages/HospitalScreenUser.dart';
 import 'package:medcave/presentation/loginsignup/login/login.dart';
-import 'package:medcave/presentation/onBoarding/page/onboardingscreen1.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:medcave/presentation/onBoarding/page/onboardingscreen.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
 
@@ -14,21 +14,21 @@ class AuthWrapper extends StatefulWidget {
 
 class _AuthWrapperState extends State<AuthWrapper> {
   late Stream<User?> _authStream;
-   bool? _hasSeenOnboarding;
+  //  bool? _hasSeenOnboarding;
 
   @override
   void initState() {
     super.initState();
     _authStream = FirebaseAuth.instance.authStateChanges();
-     _checkOnboardingStatus();
+    //  _checkOnboardingStatus();
   }
 
-Future<void> _checkOnboardingStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
-    });
-  }
+// Future<void> _checkOnboardingStatus() async {
+//     final prefs = await SharedPreferences.getInstance();
+//     setState(() {
+//       _hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+//     });
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ Future<void> _checkOnboardingStatus() async {
       stream: _authStream,
       builder: (context, snapshot) {
         // Show loading indicator while checking auth state
-        if (snapshot.connectionState == ConnectionState.waiting || _hasSeenOnboarding == null) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
@@ -53,7 +53,7 @@ Future<void> _checkOnboardingStatus() async {
         //   // User is logged in
         //   if (!_hasSeenOnboarding!) {
         //     // First time user
-        //     return const Onboardingscreen1();
+        //     return const OnboardingScreen();
         //   }
         //   // Returning user
         //   return const Hospitalscreenuser();

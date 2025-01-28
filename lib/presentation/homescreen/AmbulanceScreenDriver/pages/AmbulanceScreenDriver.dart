@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medcave/core/confiq/fonts/font.dart';
 
 import 'slider.dart';
 
@@ -9,6 +8,5 @@ class AmbulancescreenDriver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return SlideToTakeRide();
-
   }
 }

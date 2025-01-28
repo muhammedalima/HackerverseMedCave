@@ -19,6 +19,7 @@ class LocationService {
     }
 
     final position = await Geolocator.getCurrentPosition(
+      // ignore: deprecated_member_use
       desiredAccuracy: LocationAccuracy.high,
     );
 
@@ -45,13 +46,14 @@ class LocationService {
 class MapPicker extends StatefulWidget {
   final LatLng? initialLocation;
 
-  const MapPicker({Key? key, this.initialLocation}) : super(key: key);
+  const MapPicker({super.key, this.initialLocation});
 
   @override
   State<MapPicker> createState() => _MapPickerState();
 }
 
 class _MapPickerState extends State<MapPicker> {
+  // ignore: unused_field
   late GoogleMapController _controller;
   LatLng? _selectedLocation;
 

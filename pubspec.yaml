@@ -50,6 +50,7 @@ dependencies:
   google_maps_flutter:
   geolocator:
   geocoding:
+  speech_to_text:
 
 
 dev_dependencies:

@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medcave/common/geminifunction/geminifunction.dart';
 import 'package:medcave/common/googlemapfunction/mappicker.dart';
 import 'package:medcave/presentation/homescreen/AmbulanceScreenUser/pages/AmbulanceTracker.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class Ambulancescreenuser extends StatefulWidget {
   const Ambulancescreenuser({super.key});
@@ -14,14 +15,67 @@ class Ambulancescreenuser extends StatefulWidget {
 class _AmbulancescreenuserState extends State<Ambulancescreenuser> {
   final TextEditingController _situationController = TextEditingController();
   final Geminifunction _gemini = Geminifunction();
+  final stt.SpeechToText _speech = stt.SpeechToText();
   bool _isLoading = false;
+  bool _isListening = false;
   String _selectedLocationType = '';
   LatLng? _selectedLocation;
   String _address = '';
 
   @override
+  void initState() {
+    super.initState();
+    _initializeSpeech();
+  }
+
+  Future<void> _initializeSpeech() async {
+    bool available = await _speech.initialize(
+      onStatus: (status) {
+        if (status == 'notListening') {
+          setState(() => _isListening = false);
+        }
+      },
+      onError: (error) => print('Error: $error'),
+    );
+    if (!available && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Speech recognition not available')),
+      );
+    }
+  }
+
+  Future<void> _toggleListening() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize();
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (result) {
+            setState(() {
+              _situationController.text =
+                  _situationController.text + ' ' + result.recognizedWords;
+              _situationController.selection = TextSelection.fromPosition(
+                TextPosition(offset: _situationController.text.length),
+              );
+            });
+          },
+          listenFor: const Duration(seconds: 30),
+          pauseFor: const Duration(seconds: 3),
+          partialResults: true,
+          cancelOnError: true,
+          listenMode: stt.ListenMode.confirmation,
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
+  @override
   void dispose() {
     _situationController.dispose();
+    _speech.stop();
     super.dispose();
   }
 
@@ -136,10 +190,9 @@ class _AmbulancescreenuserState extends State<Ambulancescreenuser> {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 100, // Fixed height for both buttons
+          height: 100,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          margin: const EdgeInsets.symmetric(
-              horizontal: 8), // Added margin for spacing
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
             color: isSelected ? Colors.black : Colors.white,
             borderRadius: BorderRadius.circular(8),
@@ -297,16 +350,19 @@ class _AmbulancescreenuserState extends State<Ambulancescreenuser> {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: const Icon(
-                          Icons.mic,
-                          color: Colors.white,
+                      child: GestureDetector(
+                        onTap: _toggleListening,
+                        child: Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                            color: _isListening ? Colors.red : Colors.black,
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Icon(
+                            _isListening ? Icons.stop : Icons.mic,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
